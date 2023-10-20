@@ -9,9 +9,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'about.apps.AboutConfig',
+
     'homepage.apps.HomepageConfig',
     'ice_cream.apps.IceCreamConfig',
+    'about.apps.AboutConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

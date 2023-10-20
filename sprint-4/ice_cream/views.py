@@ -1,7 +1,4 @@
-from django.http import HttpResponse
-
 from django.shortcuts import render
-
 
 
 def ice_cream_detail(request, pk):

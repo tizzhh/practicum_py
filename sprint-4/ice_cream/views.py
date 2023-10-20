@@ -1,11 +1,14 @@
 from django.http import HttpResponse
 
-ICE_CREAM = chr(127846)
+from django.shortcuts import render
+
 
 
 def ice_cream_detail(request, pk):
-    return HttpResponse(f'Мороженое номер {pk}')
+    template = 'ice_cream/detail.html'
+    return render(request, template)
 
 
 def ice_cream_list(request):
-    return HttpResponse('Каталог мороженого')
+    template = 'ice_cream/list.html'
+    return render(request, template)

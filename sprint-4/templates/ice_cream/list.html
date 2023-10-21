@@ -8,12 +8,12 @@
     {% for ice_cream in ice_cream_list %}
       <li>
         <h3>{{ ice_cream.title }}</h3>
-        <p>{{ ice_cream.description }}</p>
+        <p>{{ ice_cream.description|truncatewords:10 }}</p>
         <a href="{% url 'ice_cream:ice_cream_detail' ice_cream.id %}">Подробнее</a>
       </li>
       {% if not forloop.last %}
         <hr>
-      {% endif %}   
+      {% endif %}
     {% endfor %}
   </ul>
 {% endblock %}

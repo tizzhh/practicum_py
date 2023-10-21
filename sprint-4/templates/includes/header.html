@@ -1,4 +1,16 @@
 <header>
   <p>Место для логотипа</p>
-  <nav>Навигация</nav>
+  <nav>
+    <ul>
+      <li>
+        <a href="{% url 'homepage:index' %}">Главная</a>
+      </li>
+      <li>
+        <a href="{% url 'ice_cream:ice_cream_list' %}">Список мороженого</a>
+      </li>
+      <li>
+        <a href="{% url 'about:description' %}">О проекте</a>
+      </li>
+    </ul>
+  </nav>
 </header>

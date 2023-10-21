@@ -31,5 +31,5 @@ def ice_cream_detail(request, pk):
 
 def ice_cream_list(request):
     template = 'ice_cream/list.html'
-    context = {'ice_cream_catalog': ice_cream_catalog}
+    context = {'ice_cream_list': ice_cream_catalog}
     return render(request, template, context)

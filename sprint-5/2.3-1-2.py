@@ -1,17 +1,18 @@
 import sqlite3
 
 con = sqlite3.connect('db.sqlite')
-
 cur = con.cursor()
 
 results = cur.execute(
     '''
 SELECT ice_cream.title,
-       wrappers.title
+       categories.slug,
+       MAX(ice_cream.price)
 FROM ice_cream,
-     wrappers
-WHERE ice_cream.wrapper_id = wrappers.id
-  AND wrappers.title LIKE 'Б%';
+     categories
+WHERE ice_cream.category_id = categories.id
+GROUP BY categories.slug
+ORDER BY ice_cream.price DESC;
 '''
 )
 

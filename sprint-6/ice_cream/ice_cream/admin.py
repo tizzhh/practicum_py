@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import Category, Topping, Wrapper, IceCream
+from .models import Category, IceCream, Topping, Wrapper
 
-
-models = [Category, Topping, Wrapper, IceCream]
-admin.site.register(models)
+admin.site.register(Topping)
+admin.site.register(Wrapper)
+admin.site.register(IceCream)
+admin.site.register(Category)

@@ -5,7 +5,7 @@ from core.models import PublishedModel
 
 class Category(PublishedModel):
     title = models.CharField('Название', max_length=256)
-    slug = models.SlugField('Слаг', max_length=64, unique=True)
+    slug = models.SlugField('Слаг', max_length=64)
     output_order = models.PositiveSmallIntegerField(
         'Порядок отображения',
         default=100
@@ -21,7 +21,7 @@ class Category(PublishedModel):
 
 class Topping(PublishedModel):
     title = models.CharField('Название', max_length=256)
-    slug = models.SlugField('Слаг', max_length=64, unique=True)
+    slug = models.SlugField('Слаг', max_length=64)
 
     class Meta:
         verbose_name = 'топпинг'

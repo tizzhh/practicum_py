@@ -1,4 +1,5 @@
 from django.db import models
+
 from core.models import PublishedModel
 
 
@@ -14,7 +15,9 @@ class Topping(PublishedModel):
 
 
 class Wrapper(PublishedModel):
-    title = models.CharField(max_length=256)
+    title = models.CharField(
+        max_length=256
+    )
 
 
 class IceCream(PublishedModel):
@@ -24,13 +27,13 @@ class IceCream(PublishedModel):
     wrapper = models.OneToOneField(
         Wrapper,
         on_delete=models.SET_NULL,
-        related_name='ice_cream',
+        related_name='wrapper',
         null=True,
-        blank=True,
+        blank=True
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='ice_creams',
+        related_name='category'
     )
     toppings = models.ManyToManyField(Topping)

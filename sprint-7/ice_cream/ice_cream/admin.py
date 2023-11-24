@@ -9,8 +9,12 @@ class IceCreamInline(admin.StackedInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    inlines = (IceCreamInline,)
-    list_display = ('title',)
+    inlines = (
+        IceCreamInline,
+    )
+    list_display = (
+        'title',        
+    )
 
 
 class IceCreamAdmin(admin.ModelAdmin):
@@ -20,14 +24,14 @@ class IceCreamAdmin(admin.ModelAdmin):
         'is_published',
         'is_on_main',
         'category',
-        'wrapper',
+        'wrapper'
     )
     list_editable = (
         'is_published',
         'is_on_main',
         'category',
-    )
-    search_fields = ('title',)
+    )    
+    search_fields = ('title',) 
     list_filter = ('category',)
     list_display_links = ('title',)
     filter_horizontal = ('toppings',)

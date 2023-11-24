@@ -11,6 +11,7 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
+    'django_bootstrap5',
     'homepage.apps.HomepageConfig',
     'ice_cream.apps.IceCreamConfig',
     'about.apps.AboutConfig',

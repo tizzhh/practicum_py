@@ -11,7 +11,6 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
-    'django_bootstrap5',
     'homepage.apps.HomepageConfig',
     'ice_cream.apps.IceCreamConfig',
     'about.apps.AboutConfig',
@@ -22,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [

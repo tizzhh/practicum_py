@@ -6,23 +6,9 @@
 
 {% block content %}
  <form action="{% url 'contest:accepted' %}">
-    <p>
-      <label for="title">Название:</label>
-      <input type="text" id="title" name="title" required>
-    </p>
-    <p>
-      <label for="description">Описание:</label>
-      <input type="text" id="description" name="description" required>
-    </p>
-    <p>
-      <label for="price">Цена:</label>
-      <input id="price" type="number" name="price" required>
-      <small>Рекомендованная розничная цена</small>
-    </p>
-    <p>
-      <label for="comment">Комментарий:</label>
-      <input type="text" id="comment" name="comment">
-    </p>
-    <input type="submit" value="Отправить">
- </form>
+  <table>
+     {{ form }}
+  </table>
+  <input type="submit" value="Отправить">
+</form>
 {% endblock %}

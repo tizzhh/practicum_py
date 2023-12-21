@@ -9,8 +9,8 @@ def series_sum(incoming):
 # Первое тестирование: проверьте, корректно ли сработает функция series_sum(),
 # если ей на вход передать список из целых и дробных чисел.
 
-mixed_numbers =  [1, 1.5]
-result_numbers =  '11.5'
+mixed_numbers = [1, 1.5]
+result_numbers = '11.5'
 
 # Вместо многоточия напишите утверждение, которое должно быть проверено.
 assert series_sum(mixed_numbers) == result_numbers, (
@@ -20,8 +20,8 @@ assert series_sum(mixed_numbers) == result_numbers, (
 # Второе тестирование: проверьте, корректно ли сработает функция series_sum(),
 # если ей на вход передать список из чисел и строк.
 
-mixed_numbers_strings =  [1, 'a']
-result_numbers_strings =  '1a'
+mixed_numbers_strings = [1, 'a']
+result_numbers_strings = '1a'
 
 # Вместо многоточия напишите утверждение, которое должно быть проверено.
 assert series_sum(mixed_numbers_strings) == result_numbers_strings, (
@@ -30,8 +30,8 @@ assert series_sum(mixed_numbers_strings) == result_numbers_strings, (
 
 # Третье тестирование: проверьте, корректно ли сработает функция series_sum(),
 # если ей на вход передать пустой список.
-empty =  []
-result_empty =  ''
+empty = []
+result_empty = ''
 
 # Вместо многоточия напишите утверждение, которое должно быть проверено.
 assert series_sum(empty) == result_empty, (

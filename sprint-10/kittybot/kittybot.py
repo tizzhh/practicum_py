@@ -1,29 +1,40 @@
-from telegram import Bot
-from telegram.ext import CommandHandler, Updater, Filters, MessageHandler
+import os
+
+import requests
+from dotenv import load_dotenv
+from telegram import ReplyKeyboardMarkup, Update
+from telegram.ext import CallbackContext, CommandHandler, Updater
+
+load_dotenv()
+secret_token = os.getenv('TOKEN')
+
+updater = Updater(token=secret_token)
+URL = 'https://api.thecatapi.com/v1/images/search'
 
 
-TELEGRAM_TOKEN = '6722886196:AAFvxWXiBI4Sf2HVKKo3LP4dPXMHvzV0XxI'
-CHAT_ID = '430814010'
-
-bot = Bot(token=TELEGRAM_TOKEN)
-updater = Updater(token=TELEGRAM_TOKEN)
+def get_new_cat_img():
+    response = requests.get(URL).json()
+    return response[0].get('url')
 
 
-def send_message(message):
-    bot.send_message(CHAT_ID, message)
-
-
-def say_hi(update, context):
+def new_cat(update: Update, context: CallbackContext):
     chat = update.effective_chat
-    context.bot.send_message(chat_id=chat.id, text='Privetuli')
+    context.bot.send_photo(chat.id, get_new_cat_img())
 
 
-def wake_up(update, context):
+def wake_up(update: Update, context: CallbackContext):
     chat = update.effective_chat
-    context.bot.send_message(chat_id=chat.id, text='Thanks, I am awake now')
+    button = ReplyKeyboardMarkup([['/newcat']], resize_keyboard=True)
+    context.bot.send_message(
+        chat_id=chat.id,
+        text=f'Thanks, {chat.first_name} I am awake now',
+        reply_markup=button,
+    )
+    context.bot.send_photo(chat.id, get_new_cat_img())
 
 
 updater.dispatcher.add_handler(CommandHandler('start', wake_up))
-updater.dispatcher.add_handler(MessageHandler(Filters.text, say_hi))
+updater.dispatcher.add_handler(CommandHandler('newcat', new_cat))
+
 updater.start_polling()
 updater.idle()

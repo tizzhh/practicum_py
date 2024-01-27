@@ -1,32 +1,24 @@
 from rest_framework import serializers
 
-from .models import Group, Post, Tag, TagPost
-
-
-# опишите сериализатор для хештегов
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = ('name',)
+from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    group = serializers.SlugRelatedField(
-        slug_field='slug', queryset=Group.objects.all(), required=False
+    character_quantity = serializers.SerializerMethodField()
+    publication_date = serializers.DateTimeField(
+        source='pub_date', read_only=True
     )
-    tag = TagSerializer(many=True, required=False)
 
     class Meta:
-        fields = ('id', 'text', 'author', 'image', 'pub_date', 'group', 'tag')
+        fields = (
+            'id',
+            'text',
+            'author',
+            'image',
+            'character_quantity',
+            'publication_date',
+        )
         model = Post
 
-    def create(self, validated_data):
-        if 'tag' not in self.initial_data:
-            return Post.objects.create(**validated_data)
-
-        tags = validated_data.pop('tag')
-        post = Post.objects.create(**validated_data)
-        for tag in tags:
-            cur_tag, status = Tag.objects.get_or_create(**tag)
-            TagPost.objects.create(tag=cur_tag, post=post)
-        return post
+    def get_character_quantity(self, obj):
+        return len(obj.text)

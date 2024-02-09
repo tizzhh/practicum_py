@@ -1,6 +1,7 @@
 # test_example.py
-import pytest
 from time import sleep
+
+import pytest
 
 
 def one_more(x):

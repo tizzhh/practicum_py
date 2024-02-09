@@ -1,6 +1,7 @@
 from typing import Any
-from django.views.generic import TemplateView
+
 from contest.models import Contest
+from django.views.generic import TemplateView
 
 
 class Description(TemplateView):

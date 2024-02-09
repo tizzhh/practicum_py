@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from ice_cream.models import IceCream
 
 

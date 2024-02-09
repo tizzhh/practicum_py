@@ -1,9 +1,7 @@
 # example_for_log.py
 
 import logging
-
 from logging.handlers import RotatingFileHandler
-
 
 logging.basicConfig(
     level=logging.DEBUG,

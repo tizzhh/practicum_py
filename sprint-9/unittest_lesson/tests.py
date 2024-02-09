@@ -1,9 +1,8 @@
 # tests.py
 import unittest
+from code import service_100
 from datetime import datetime
 from time import sleep
-
-from code import service_100
 
 
 class TestTimeService(unittest.TestCase):

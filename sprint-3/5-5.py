@@ -1,5 +1,5 @@
 # импортируем функции из библиотеки math для рассчёта расстояния
-from math import radians, sin, cos, acos
+from math import acos, cos, radians, sin
 
 
 class Point:

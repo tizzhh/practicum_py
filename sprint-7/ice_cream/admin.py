@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Topping, Wrapper, IceCream
+from .models import Category, IceCream, Topping, Wrapper
 
 
 class IceCreamInline(admin.StackedInline):

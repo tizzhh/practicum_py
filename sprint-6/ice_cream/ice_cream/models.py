@@ -1,6 +1,5 @@
-from django.db import models
-
 from core.models import PublishedModel
+from django.db import models
 
 
 class Category(PublishedModel):

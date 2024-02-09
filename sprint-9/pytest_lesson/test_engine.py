@@ -19,7 +19,10 @@ def engine():
 #     # Изменяем значение свойства объекта:
 #     engine.is_running = True
 
-@pytest.fixture(autouse=True)  # Обозначаем фикстуру как автоматически вызываемую.
+
+@pytest.fixture(
+    autouse=True
+)  # Обозначаем фикстуру как автоматически вызываемую.
 def start_engine(engine):
     """Фикстура запускает двигатель."""
     engine.is_running = True
@@ -28,14 +31,15 @@ def start_engine(engine):
 # def test_engine_is_running(engine, start_engine):  # Вызываем обе фикстуры.
 #     """Тест проверяет, работает ли двигатель."""
 #     assert engine.is_running  # Проверяем, что значение атрибута is_running это True.
-    
+
 # Добавляем маркер и указываем название фикстуры строкой.
-# @pytest.mark.usefixtures('start_engine') 
+# @pytest.mark.usefixtures('start_engine')
 # def test_engine_is_running(engine):  # А из параметров функции фикстуру start_engine убираем.
 #     assert engine.is_running
-    
-# Вызываем только одну фикстуру. 
+
+
+# Вызываем только одну фикстуру.
 # Запуск двигателя выполнится автоматически, без вызова.
-def test_engine_is_running(engine):  
+def test_engine_is_running(engine):
     """Тест проверяет, работает ли двигатель."""
-    assert engine.is_running 
+    assert engine.is_running

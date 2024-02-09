@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('ice_cream', '0003_auto_20221229_2158'),
     ]
@@ -12,10 +11,18 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='category',
-            options={'ordering': ('output_order', 'title'), 'verbose_name': 'категория', 'verbose_name_plural': 'Категории'},
+            options={
+                'ordering': ('output_order', 'title'),
+                'verbose_name': 'категория',
+                'verbose_name_plural': 'Категории',
+            },
         ),
         migrations.AlterModelOptions(
             name='icecream',
-            options={'ordering': ('output_order', 'title'), 'verbose_name': 'мороженое', 'verbose_name_plural': 'Мороженое'},
+            options={
+                'ordering': ('output_order', 'title'),
+                'verbose_name': 'мороженое',
+                'verbose_name_plural': 'Мороженое',
+            },
         ),
     ]

@@ -21,8 +21,10 @@ class Quest:
             return 'Нельзя завершить то, что не имеет начала!'
         self.end_time = dt.datetime.now()
         completion_time = self.end_time - self.start_time
-        return (f'Квест "{self.name}" окончен.'
-                f' Время выполнения квеста: {completion_time}')
+        return (
+            f'Квест "{self.name}" окончен.'
+            f' Время выполнения квеста: {completion_time}'
+        )
 
     # Напишите код метода __str__.
     def __str__(self) -> str:

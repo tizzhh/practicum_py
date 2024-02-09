@@ -7,8 +7,10 @@ def attack(char_name: str, char_class: str) -> str:
     if char_class == 'mage':
         return f'{char_name} нанёс урон противнику равный {5 + randint(5, 10)}'
     if char_class == 'healer':
-        return (f'{char_name} нанёс урон противнику равный '
-                f'{5 + randint(-3, -1)}')
+        return (
+            f'{char_name} нанёс урон противнику равный '
+            f'{5 + randint(-3, -1)}'
+        )
     return 'wrong class'
 
 
@@ -24,8 +26,10 @@ def defence(char_name: str, char_class: str) -> str:
 
 def special(char_name: str, char_class: str) -> str:
     if char_class == 'warrior':
-        return (f'{char_name} применил специальное умение '
-                f'Выносливость {80 + 25}»')
+        return (
+            f'{char_name} применил специальное умение '
+            f'Выносливость {80 + 25}»'
+        )
     if char_class == 'mage':
         return f'{char_name} применил специальное умение «Атака {5 + 40}»'
     if char_class == 'healer':
@@ -73,8 +77,10 @@ def choice_char_class() -> str:
                 'Сильный, выносливый и отважный.',
             )
         if char_class == 'mage':
-            print('Маг — находчивый воин дальнего боя. '
-                  'Обладает высоким интеллектом.')
+            print(
+                'Маг — находчивый воин дальнего боя. '
+                'Обладает высоким интеллектом.'
+            )
         if char_class == 'healer':
             print(
                 'Лекарь — могущественный заклинатель. '

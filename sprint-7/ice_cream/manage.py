@@ -6,9 +6,14 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'anfisa_for_friends.settings')
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE', 'anfisa_for_friends.settings'
+    )
     try:
-        from django.core.management import call_command, execute_from_command_line
+        from django.core.management import (
+            call_command,
+            execute_from_command_line,
+        )
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
@@ -16,7 +21,9 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
-    call_command('loaddata', '/app/static_dev/db.json')  # works only on the platform
+    call_command(
+        'loaddata', '/app/static_dev/db.json'
+    )  # works only on the platform
 
 
 if __name__ == '__main__':

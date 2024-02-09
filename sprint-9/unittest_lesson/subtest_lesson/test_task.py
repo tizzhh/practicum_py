@@ -8,7 +8,6 @@ def bartender(order):
 
 
 class TestBar(unittest.TestCase):
-
     def test_bartender(self):
         values_results = (
             (5, 5),
@@ -19,9 +18,6 @@ class TestBar(unittest.TestCase):
         )
 
         for value, expected_result in values_results:
-            with self.subTest(
-                value=value,
-                expected_result=expected_result
-            ):
+            with self.subTest(value=value, expected_result=expected_result):
                 result = bartender(value)
                 self.assertEqual(result, expected_result)

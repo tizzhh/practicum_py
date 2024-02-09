@@ -5,21 +5,40 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('title', models.CharField(max_length=256, verbose_name='Название')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'is_published',
+                    models.BooleanField(
+                        default=True, verbose_name='Опубликовано'
+                    ),
+                ),
+                (
+                    'title',
+                    models.CharField(max_length=256, verbose_name='Название'),
+                ),
                 ('slug', models.SlugField(max_length=64, verbose_name='Слаг')),
-                ('output_order', models.PositiveSmallIntegerField(default=100, verbose_name='Порядок отображения')),
+                (
+                    'output_order',
+                    models.PositiveSmallIntegerField(
+                        default=100, verbose_name='Порядок отображения'
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'категория',
@@ -29,9 +48,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Topping',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('title', models.CharField(max_length=256, verbose_name='Название')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'is_published',
+                    models.BooleanField(
+                        default=True, verbose_name='Опубликовано'
+                    ),
+                ),
+                (
+                    'title',
+                    models.CharField(max_length=256, verbose_name='Название'),
+                ),
                 ('slug', models.SlugField(max_length=64, verbose_name='Слаг')),
             ],
             options={
@@ -42,9 +77,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Wrapper',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('title', models.CharField(max_length=256, verbose_name='Название')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'is_published',
+                    models.BooleanField(
+                        default=True, verbose_name='Опубликовано'
+                    ),
+                ),
+                (
+                    'title',
+                    models.CharField(max_length=256, verbose_name='Название'),
+                ),
             ],
             options={
                 'verbose_name': 'обёртка',
@@ -54,14 +105,58 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IceCream',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
-                ('is_on_main', models.BooleanField(default=False, verbose_name='На главную')),
-                ('title', models.CharField(max_length=256, verbose_name='Название')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
+                (
+                    'is_published',
+                    models.BooleanField(
+                        default=True, verbose_name='Опубликовано'
+                    ),
+                ),
+                (
+                    'is_on_main',
+                    models.BooleanField(
+                        default=False, verbose_name='На главную'
+                    ),
+                ),
+                (
+                    'title',
+                    models.CharField(max_length=256, verbose_name='Название'),
+                ),
                 ('description', models.TextField(verbose_name='Описание')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ice_creams', to='ice_cream.category', verbose_name='Категория')),
-                ('toppings', models.ManyToManyField(to='ice_cream.Topping', verbose_name='Топпинги')),
-                ('wrapper', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='ice_cream', to='ice_cream.wrapper', verbose_name='Обёртка')),
+                (
+                    'category',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='ice_creams',
+                        to='ice_cream.category',
+                        verbose_name='Категория',
+                    ),
+                ),
+                (
+                    'toppings',
+                    models.ManyToManyField(
+                        to='ice_cream.Topping', verbose_name='Топпинги'
+                    ),
+                ),
+                (
+                    'wrapper',
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name='ice_cream',
+                        to='ice_cream.wrapper',
+                        verbose_name='Обёртка',
+                    ),
+                ),
             ],
             options={
                 'verbose_name': 'мороженое',

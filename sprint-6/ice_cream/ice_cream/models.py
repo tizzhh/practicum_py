@@ -7,8 +7,7 @@ class Category(PublishedModel):
     title = models.CharField('Название', max_length=256)
     slug = models.SlugField('Слаг', max_length=64, unique=True)
     output_order = models.PositiveSmallIntegerField(
-        'Порядок отображения',
-        default=100
+        'Порядок отображения', default=100
     )
 
     class Meta:
@@ -35,7 +34,7 @@ class Wrapper(PublishedModel):
     title = models.CharField(
         'Название',
         max_length=256,
-        help_text='Уникальное название обёртки, не более 256 символов'
+        help_text='Уникальное название обёртки, не более 256 символов',
     )
 
     class Meta:
@@ -56,13 +55,13 @@ class IceCream(PublishedModel):
         related_name='ice_cream',
         null=True,
         blank=True,
-        verbose_name='Обёртка'
+        verbose_name='Обёртка',
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
         related_name='ice_creams',
-        verbose_name='Категория'
+        verbose_name='Категория',
     )
     toppings = models.ManyToManyField(Topping, verbose_name='Топпинги')
 

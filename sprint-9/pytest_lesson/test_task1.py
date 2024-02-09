@@ -1,5 +1,6 @@
 import pytest
 
+
 def cartesian_product(a, b):
     return a * b
 

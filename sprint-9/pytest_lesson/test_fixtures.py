@@ -5,15 +5,17 @@ import pytest
 def give_me_a_string():
     return 'Какой чудесный день!'  # Фикстура возвращает строку.
 
+
 # Новая фикстура возвращает список со строкой из первой фикстуры.
 @pytest.fixture
 def pack_to_list(give_me_a_string):  # Фикстура может вызывать другие фикстуры.
     return [give_me_a_string]
 
-# Если тестовой функции для работы нужна фикстура, 
+
+# Если тестовой функции для работы нужна фикстура,
 # она указывается в параметрах.
 # Тестовая функция использует обе фикстуры и проверяет их содержимое
-def test_string_fixture(pack_to_list, give_me_a_string):  
-    # Переменная с именем фикстуры содержит в себе объект, 
+def test_string_fixture(pack_to_list, give_me_a_string):
+    # Переменная с именем фикстуры содержит в себе объект,
     # который вернула фикстура.
-    assert pack_to_list != [give_me_a_string] 
+    assert pack_to_list != [give_me_a_string]

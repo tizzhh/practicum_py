@@ -9,12 +9,14 @@ logging.basicConfig(
     level=logging.DEBUG,
     filename='main.log',
     filemode='w',
-    format='%(asctime)s, %(levelname)s, %(message)s, %(name)s'
+    format='%(asctime)s, %(levelname)s, %(message)s, %(name)s',
 )
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-handler = RotatingFileHandler('my_logger.log', maxBytes=50000000, backupCount=5)
+handler = RotatingFileHandler(
+    'my_logger.log', maxBytes=50000000, backupCount=5
+)
 logger.addHandler(handler)
 
 formatter = logging.Formatter(
@@ -22,7 +24,7 @@ formatter = logging.Formatter(
 )
 handler.setFormatter(formatter)
 
-logger.debug('123')  # Когда нужна отладочная информация 
+logger.debug('123')  # Когда нужна отладочная информация
 logger.info('Сообщение отправлено')  # Когда нужна дополнительная информация
 logger.warning('Большая нагрузка!')  # Когда что-то идёт не так, но работает
 logger.error('Бот не смог отправить сообщение')  # Когда что-то сломалось

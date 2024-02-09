@@ -18,7 +18,9 @@ class TestCalc(unittest.TestCase):
         """Тестирование функции sum_string с конкатенацией строк."""
         # Можно обращаться к объекту калькулятора через имя класса - TestCalc.calc
         act = TestCalc.calc.sum_string(1, 100500)
-        self.assertEqual(act, 1100500, 'Метод sum_string работает неправильно.')
+        self.assertEqual(
+            act, 1100500, 'Метод sum_string работает неправильно.'
+        )
 
     def test_sum_string_second_negative_value(self):
         """Тестирование исключения с отрицательным числом."""

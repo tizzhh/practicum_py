@@ -35,7 +35,7 @@ class TestExample(unittest.TestCase):
     def test_one(self):  # Это имитация обычного теста.
         print('>>>> test_one')
 
-    def test_one_more(self): # Имитация другого теста.
+    def test_one_more(self):  # Имитация другого теста.
         print('>>>> test_one_more')
 
 

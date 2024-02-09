@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 
 from ice_cream.models import IceCream
@@ -8,9 +7,7 @@ def index(request):
     template = 'homepage/index.html'
     # Доработайте запрос.
     ice_cream_list = (
-        IceCream.objects.values(
-            'title', 'id', 'description', 'wrapper__title'
-        )
+        IceCream.objects.values('title', 'id', 'description', 'wrapper__title')
         .filter(is_on_main=True, is_published=True)
         .order_by('title')
     )

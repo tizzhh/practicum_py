@@ -2,7 +2,7 @@
 from engine_class import Engine
 
 
-def test_engine_is_running(engine):  
+def test_engine_is_running(engine):
     """Тест проверяет, работает ли двигатель."""
     assert engine.is_running
 

@@ -2,11 +2,10 @@ from unittest import TestCase
 
 
 def get_square(num):
-    return num ** 2
+    return num**2
 
 
 class TestExample(TestCase):
-
     def test_square(self):
         """Тест возведения в квадрат."""
         values_results = (
@@ -23,7 +22,7 @@ class TestExample(TestCase):
                 value=value,
                 expected_result=expected_result,
                 msg=f'Возведение числа {value} в квадрат дало результат,\n'
-                    f'отличающийся от ожидаемого {expected_result}',
+                f'отличающийся от ожидаемого {expected_result}',
             ):
                 result = get_square(value)
                 self.assertEqual(result, expected_result)

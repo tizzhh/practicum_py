@@ -11,21 +11,31 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="category",
-            options={"verbose_name": "категорию", "verbose_name_plural": "Категории"},
+            options={
+                "verbose_name": "категорию",
+                "verbose_name_plural": "Категории",
+            },
         ),
         migrations.AlterModelOptions(
             name="wrapper",
-            options={"verbose_name": "обёртку", "verbose_name_plural": "Обёртки"},
+            options={
+                "verbose_name": "обёртку",
+                "verbose_name_plural": "Обёртки",
+            },
         ),
         migrations.AlterField(
             model_name="category",
             name="slug",
-            field=models.SlugField(max_length=64, unique=True, verbose_name="Слаг"),
+            field=models.SlugField(
+                max_length=64, unique=True, verbose_name="Слаг"
+            ),
         ),
         migrations.AlterField(
             model_name="topping",
             name="slug",
-            field=models.SlugField(max_length=64, unique=True, verbose_name="Слаг"),
+            field=models.SlugField(
+                max_length=64, unique=True, verbose_name="Слаг"
+            ),
         ),
         migrations.AlterField(
             model_name="wrapper",

@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import filters, generics, permissions
 
 from posts.models import Post
 
@@ -10,6 +10,8 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('$text',)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

@@ -1,0 +1,779 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>³Алгоритмы: сложность, структуры данных&nbsp;| Я.Шпора</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style>
+<link rel="apple-touch-icon" sizes="180x180" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/favicon-16x16.png">
+<link rel="manifest" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/site.webmanifest">
+<link rel="mask-icon" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://code.s3.yandex.net/Python-dev/cheatsheets/static/ico/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="../static/ico/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link href="%C2%B3%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C,%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AF.%D0%A8%D0%BF%D0%BE%D1%80%D0%B0_files/prism.css" rel="stylesheet">
+<script src="%C2%B3%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C,%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AF.%D0%A8%D0%BF%D0%BE%D1%80%D0%B0_files/prism.js"></script>
+<link href="%C2%B3%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C,%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AF.%D0%A8%D0%BF%D0%BE%D1%80%D0%B0_files/custom.css" rel="stylesheet">
+<script src="%C2%B3%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C,%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AF.%D0%A8%D0%BF%D0%BE%D1%80%D0%B0_files/custom.js"></script>
+<!-- base href="https://code.s3.yandex.net/Python-dev/cheatsheets/052-algoritmy-slozhnost-struktury-dannyh-shpora/052-algoritmy-slozhnost-struktury-dannyh-shpora.html" -->
+</head><body><article id="8e3ce38a-f922-4787-922b-82601ba0e7fb" class="page sans"><header><h1 class="page-title">Алгоритмы: сложность, структуры данных<strong>&nbsp;| Я.Шпора</strong></h1><p class="page-description"></p><h3 id="6752d08d-e91d-42b3-b417-532ee5569715" class="">Импортируемые структуры данных: массив</h3><p id="48f7ebde-debf-46ac-b46a-bb379e0f09d6" class="">Массив — это набор однородных элементов, в числе которых не может быть структур данных. </p><p id="65139dc9-3751-4b6a-870d-2240294bc56a" class="">Модуль <code>array</code>
+ в Python даёт возможность создавать массивы, где элементами служат 
+примитивные типов данных — целые числа, вещественные числа и другие. 
+Массив обычно использует память более эффективно, чем список, и 
+предоставляет быстрый доступ к своим элементам.</p><p id="e8110b7c-898d-41ff-b24c-29c70cbb77fe" class="">Массив <code>array</code> объявляется так:</p><pre id="fbc4165f-98ef-4285-8138-783b23f5352c" class="code language-python" tabindex="0"><code class="language-python" style="white-space:pre-wrap;word-break:break-all"><span class="token keyword">from</span> array <span class="token keyword">import</span> array
+
+new_array <span class="token operator">=</span> array<span class="token punctuation">(</span><span class="token string">'тип_данных_элементов'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>элемент_1<span class="token punctuation">,</span> элемент_2<span class="token punctuation">,</span> элемент_3<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre><p id="8f126adb-2f61-4519-a149-5652f2873f88" class="">В классе <code>array</code> можно указать один из тринадцати доступных типов данных элементов.</p><ul id="a9bb06dc-540d-49f1-96f8-b97562e835dc" class="bulleted-list"><li style="list-style-type:disc"><code>b</code> — целые числа в диапазоне от -128 до 127.</li></ul><ul id="9f54ec26-86f7-400c-b9c3-3cf782abb007" class="bulleted-list"><li style="list-style-type:disc"><code>f</code>, <code>d</code> — числа с плавающей точкой разной степени точности.</li></ul><ul id="93bf0b84-ec68-4173-9cdc-70d55a3ff78b" class="bulleted-list"><li style="list-style-type:disc"><code>u</code> — символы Unicode: строки. Синтаксис отличается: строка не делится запятыми на элементы и не замыкается в квадратные скобки: <code>text = array('u', 'Я тоже массив!')</code></li></ul><ul id="ec6bbbca-fe3b-411d-a1b9-e6368cb63afb" class="bulleted-list"><li style="list-style-type:disc">Остальные девять типов описывают разные диапазоны целых чисел. </li></ul><p id="09b99b3a-c394-4442-9a09-ca9bbb5cd2ea" class="">Посмотреть описания доступных в <code>array</code> типов элементов можно <a href="https://docs.python.org/3.9/library/array.html#module-array">в документации</a>. </p><p id="711e825a-c5e0-4007-840a-58de06969e6c" class="">Доступ к элементам массива — по индексам:</p><pre id="0d2b6ac6-ba27-4639-a28f-3af94ee19344" class="code language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> array <span class="token keyword">import</span> array
+
+a <span class="token operator">=</span> array<span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># 5</span></code></pre><p id="337e880b-9a56-4c7a-874e-210104dd2798" class="">В <code>array</code> можно добавлять элементы и удалять их: у <code>array</code> есть методы <code>append()</code>, <code>extend()</code>, <code>insert()</code>, <code>pop()</code>, <code>remove()</code>.</p><p id="25d4d5d0-0eff-4c1d-94ba-4c8b4b77604d" class="">Время доступа к элементам в массивах — постоянное</p><p id="31142a01-87bd-455d-84c0-e0b5bf1eac58" class="">: <code>O(1)</code>. Вставка и удаление имеют сложность <code>O(n)</code>.</p><h3 id="5255fbec-c48e-4c96-a8e4-ee45c0eb2b1c" class="">Связные списки</h3><p id="868dd309-8965-49cd-9492-7ee899378f55" class=""><strong>Связный список</strong>
+ — это структура данных, в которой элементы линейно упорядочены, но 
+порядок определяется не номерами элементов (как в массивах), а 
+указателями на следующий элемент списка.</p><p id="73abb5eb-3e42-4d31-9601-33eb2dccf747" class="">Сложность основных операций в связном списке:</p><table id="953ba043-7337-490d-a911-61297fe2bcd6" class="simple-table"><tbody><tr id="27ae0f8f-5c4d-4bee-b9e9-d1f38feee612"><td id="[suQ" class=""></td><td id="@XO{" class="">Время в среднем</td><td id="ImvS" class="">Время в худшем случае</td></tr><tr id="ef759e84-f14a-4dd0-a0d1-5991558c2010"><td id="[suQ" class="">Обращение по индексу</td><td id="@XO{" class=""><code>O(n)</code></td><td id="ImvS" class=""><code>O(n)</code></td></tr><tr id="1e58ae98-8386-46f5-8c1d-92d9b37599fe"><td id="[suQ" class="">Добавление элемента на следующую позицию за текущим элементом</td><td id="@XO{" class=""><code>O(1)</code></td><td id="ImvS" class=""><code>O(1)</code></td></tr><tr id="61505dea-70a0-46ca-8d05-a7c520ba72fb"><td id="[suQ" class="">Добавление элемента на позицию перед текущим элементом</td><td id="@XO{" class=""><code>O(n)</code></td><td id="ImvS" class=""><code>O(n)</code></td></tr><tr id="0835482c-1a85-4c0e-aa71-38dc7238cec7"><td id="[suQ" class="">Удаление первого элемента</td><td id="@XO{" class=""><code>O(1)</code></td><td id="ImvS" class=""><code>O(1)</code></td></tr><tr id="546da34f-33ec-46bd-afb2-b977b0106899"><td id="[suQ" class="">Удаление текущего элемента</td><td id="@XO{" class=""><code>O(n)</code></td><td id="ImvS" class=""><code>O(n)</code></td></tr><tr id="f5b19f61-5ca3-4d8f-8cc0-2e7eee3ce204"><td id="[suQ" class="">Поиск по значению</td><td id="@XO{" class=""><code>O(n)</code></td><td id="ImvS" class=""><code>O(n)</code></td></tr><tr id="5f0a4a90-157c-4f25-a733-a3284c16cafa"><td id="[suQ" class="">Определение длины списка</td><td id="@XO{" class=""><code>O(n)</code></td><td id="ImvS" class=""><code>O(n)</code></td></tr></tbody></table><p id="65c34a83-07f8-4b0b-a1a8-04fb36fbb262" class="">Существует «продвинутая» модификация связного списка: <strong>двусвязный список</strong>. Его узлы устроены так же, как в односвязном, но хранят две ссылки: на следующий и на предыдущий элемент. </p><h3 id="767ecee0-9dea-4f6e-b7d0-065814cc20b5" class="">Стек</h3><p id="3afc41e9-266c-496e-93e5-0372dcbeaea4" class="">Стек — это массив, добавлять или считывать элементы которого можно только «с одной стороны», с <strong>вершины стека</strong>.</p><p id="65c83b85-339c-4fcf-9a10-584235b8d840" class="">Стек основан на принципе LIFO (англ. <em>last in, first out —</em> «последний вошёл — первым вышел»). Первым извлекают элемент, который добавлен позже всех. </p><p id="4c5726b2-7cd2-41c4-9ef8-7ee76aa10c3f" class=""><a href="https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks">Официальная документация</a> рекомендует реализовать стек с помощью списка. Методы списка <code>append()</code>, <code>pop()</code> и <code>len()</code>
+ реализуют минимально необходимый набор методов для стека: добавление 
+элемента на вершину стека, получение элемента и определение размера 
+стека. Вершиной стека в этой ситуации будет конец списка.</p><p id="6657c394-f21f-448c-bedb-ffc3e5ede278" class="">Набор методов стека:</p><ul id="5f8e1b3c-3606-4d8d-91a7-f0ccef424e54" class="bulleted-list"><li style="list-style-type:disc"><code>push(item)</code> — добавляет элемент на вершину стека;</li></ul><ul id="aa915280-3cc4-43c7-8c16-20e01429c1f7" class="bulleted-list"><li style="list-style-type:disc"><code>pop()</code> — возвращает элемент с вершины стека, при этом элемент удаляется из стека;</li></ul><ul id="2599a406-8d20-483d-a64f-e2b48280234d" class="bulleted-list"><li style="list-style-type:disc"><code>size()</code> — возвращает количество элементов в стеке.</li></ul><p id="467004f0-387b-48c6-9c25-82b015f479f6" class="">Иногда стек реализует дополнительные операции:</p><ul id="625681e3-72b6-44e6-a1a7-340a3a4c9665" class="bulleted-list"><li style="list-style-type:disc"><code>peek()</code> или <code>top()</code> — возвращает элемент с вершины стека, но не удаляет его;</li></ul><ul id="76786766-a8c4-4479-a63a-853182208c16" class="bulleted-list"><li style="list-style-type:disc"><code>is_empty()</code> — определяет, пуст ли стек.</li></ul><p id="6d6464ea-ce3f-4c92-a373-0cc5877c5f24" class="">Реализация стека через класс:</p><pre id="c622a32b-1604-482e-ab58-0e5eb650256b" class="code language-python" tabindex="0"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Stack</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Для хранения элементов в списке используем приватный атрибут. </span>
+        <span class="token comment"># На его приватность указывают два подчёркивания в имени.</span>
+        self<span class="token punctuation">.</span>__items <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">push</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Добавить элемент в стек."""</span>
+        self<span class="token punctuation">.</span>__items<span class="token punctuation">.</span>append<span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">pop</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Извлечь элемент из стека."""</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__items<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">peek</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Получить последний элемент без изъятия."""</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__items<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">size</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Вернуть размер стека."""</span>
+        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>__items<span class="token punctuation">)</span></code></pre><p id="17bc3957-6c56-4b0c-aee1-08024e7fba77" class="">Сложность операций стека:</p><figure id="d0247209-c78d-43a5-ace4-4114e89bae51" class="image"><a href="https://code.s3.yandex.net/Python-dev/cheatsheets/052-algoritmy-slozhnost-struktury-dannyh-shpora/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C,%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AF%20%D0%A8%D0%BF%D0%BE%D1%80%D0%B0%208e3ce38af9224787922b82601ba0e7fb/S10_19.png"><img style="width:2880px" src="%C2%B3%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C,%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%AF.%D0%A8%D0%BF%D0%BE%D1%80%D0%B0_files/S10_19.png"></a></figure><h3 id="e720d267-e947-4c7b-8dfe-1305b528b339" class="">Очередь</h3><p id="ba464fbd-a1e1-4ff9-98fb-22a76a8f9ceb" class="">Очередь основана на принципе FIFO (англ. <em>first in, first out —</em> «первым вошёл — первым вышел»). Первым извлекают элемент, который добавили раньше всех. </p><p id="c3999846-80ed-4b56-b64a-e2c4ef4ce04e" class="">Методы очереди:</p><ul id="7ffae208-35e0-4063-a5f0-d4dd7ae6a741" class="bulleted-list"><li style="list-style-type:disc"><code>push(item)</code> — добавляет элемент в конец очереди; </li></ul><ul id="638398a1-98fe-4292-9288-d123d8cd1f3b" class="bulleted-list"><li style="list-style-type:disc"><code>pop()</code> — возвращает элемент из начала очереди и удаляет его из очереди; </li></ul><ul id="ce5f40e5-2fe3-47eb-b9cf-bf324b58dbb0" class="bulleted-list"><li style="list-style-type:disc"><code>peek()</code> — возвращает элемент из начала очереди без удаления;</li></ul><ul id="a4869805-f156-4fdf-bb46-57eb9d24777d" class="bulleted-list"><li style="list-style-type:disc"><code>size()</code> — возвращает количество элементов в очереди.</li></ul><p id="5480cd48-5bed-41a2-8b92-41c3adb0d823" class="">Реализация очереди через класс:</p><pre id="81cebfcf-b9e4-42cb-81e0-1940538b0cdf" class="code language-python" tabindex="0"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Queue</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Для хранения элементов очереди применяем список.</span>
+        self<span class="token punctuation">.</span>__items <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">push</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Добавить элемент в очередь."""</span>
+        <span class="token comment"># Добавляем элемент</span>
+        <span class="token comment"># в начало списка - на место элемента с индексом 0.</span>
+        self<span class="token punctuation">.</span>__items<span class="token punctuation">.</span>insert<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> item<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">pop</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Извлечь элемент из очереди."""</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__items<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">peek</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Получить элемент, но не удалять его из очереди."""</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>__items<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">size</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""Вернуть размер очереди."""</span>
+        <span class="token keyword">return</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>__items<span class="token punctuation">)</span></code></pre><p id="68f8c86f-392a-4dc8-804b-2e091218be99" class="">Реализация очереди на основе списка имеет недостаток — вставка элемента в начало списка выполняется за время <code>О(n)</code>
+ — ведь при каждой вставке придётся сдвигать все элементы массива так, 
+чтобы они по-прежнему размещались в последовательно расположенных 
+ячейках памяти.</p><h3 id="144ba22f-a850-4b88-9c28-b59bdd5c19aa" class="">Дек</h3><p id="96100d85-7a84-4470-ba70-02368312cfd8" class="">Дек (англ. <em>deque</em>) — интерфейс, позволяющий извлекать и добавлять элементы с двух концов массива.</p><p id="88b75a13-420e-41c0-87cf-bcc023174815" class="">Методы дека:</p><ul id="57a993c0-da59-41d0-bc67-a54917b5e1f7" class="bulleted-list"><li style="list-style-type:disc"><code>push_back(item)</code> — вставка нового элемента в конец дека;</li></ul><ul id="65d8883f-788f-4443-ae5e-3a6294443fbb" class="bulleted-list"><li style="list-style-type:disc"><code>pop_back()</code> — возврат последнего элемента и удаление его из дека;</li></ul><ul id="ecaed927-f301-4003-b403-e742b2081c3c" class="bulleted-list"><li style="list-style-type:disc"><code>push_front(item)</code> — вставка нового элемента в начало;</li></ul><ul id="952b9dc2-ef09-4e1a-ae09-5d071b88f980" class="bulleted-list"><li style="list-style-type:disc"><code>pop_front()</code> — возврат первого элемента и удаление его из дека;</li></ul><ul id="10a23198-d852-4746-8391-cecc9786cc1d" class="block-color-default bulleted-list"><li style="list-style-type:disc"><code>size()</code> — количество элементов в деке.</li></ul><p id="4ef3284c-a92b-48b7-9302-0b29df324e28" class="">Предполагается, что каждый из этих методов должен работать за константное время <code>O(1)</code>, как и в очереди.</p><p id="f24f1d21-c9e4-40f0-9eb2-def1cc57feb3" class="">В Python есть <a href="https://docs.python.org/3/library/collections.html#collections.deque">готовая реализация дека</a>, которую можно импортировать из модуля <code>collections</code>. </p><pre id="d574c8ff-fe9d-4a94-aa20-c4051a92d5b6" class="code language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> deque</code></pre><p id="e47df1b8-6042-49f5-856c-eaeee1d98f56" class="">У класса <code>deque</code> есть те же методы, что и у списка:</p><ul id="1abf7e6e-f6ba-4ab7-b4ad-2c5d055af100" class="bulleted-list"><li style="list-style-type:disc"><code>append()</code> — добавить новый элемент в конец дека,</li></ul><ul id="0d56ebd7-b35d-4c0f-af92-2b57517dcdf0" class="bulleted-list"><li style="list-style-type:disc"><code>extend()</code> — добавить к деку другой массив,</li></ul><ul id="bc0e103e-4c66-4795-9d0b-adbe0baaaf37" class="bulleted-list"><li style="list-style-type:disc"><code>pop()</code> — получить последний элемент и удалить его из дека,</li></ul><ul id="5a8a3c86-8bac-4545-bb21-045e4a695e0a" class="bulleted-list"><li style="list-style-type:disc">…и все прочие. </li></ul><p id="7a4cca45-95ea-4476-8e20-05b70ae6a95b" class="">Есть и специальные методы, присущие именно деку, например:</p><ul id="ed089b8f-912c-40ea-8b33-0c1976f6f9ba" class="bulleted-list"><li style="list-style-type:disc"><code>appendleft()</code> — добавить новый элемент в начало дека,</li></ul><ul id="1d75c4ca-f922-4750-a3fc-0adb151838c6" class="bulleted-list"><li style="list-style-type:disc"><code>popleft()</code> — получить первый элемент и удалить его из дека.</li></ul><p id="2e525377-33a2-4922-b6ab-a9ff288886f1" class="">Эти операции работают за константное время <code>O(1)</code>.</p><p id="a27c4c6c-111c-4a77-9c2c-65796f2d50ab" class="">У встроенного класса <code>deque</code>
+ есть полезная особенность: для него можно установить максимальную 
+длину. Тогда при заполнении очереди всякий новый элемент будет 
+выталкивать, удалять «лишние» элементы с противоположной стороны 
+очереди.</p><pre id="4f207820-215f-4028-9da6-967a9f9a9594" class="code language-python" tabindex="0"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> deque
+
+data <span class="token operator">=</span> deque<span class="token punctuation">(</span>maxlen<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> item <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data<span class="token punctuation">.</span>appendleft<span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span></code></pre><h3 id="cf047eac-b4de-4472-9f2a-334d16189c7c" class="">Хеш-таблицы</h3><p id="9cde0260-d4f2-4885-9915-d71e2b12e047" class="">Хеш-таблица — это коллекция элементов. Каждый элемент состоит из ключа и значения, которые доступны разработчику: </p><ul id="aea0909c-b57e-4a7e-aaeb-bffec2f32120" class="bulleted-list"><li style="list-style-type:disc">при создании элемента разработчик задаёт пару «ключ-значение», </li></ul><ul id="6eaf60e4-aa9d-4161-8769-2c107e22c9cf" class="bulleted-list"><li style="list-style-type:disc">при поиске нужного элемента разработчик указывает ключ.</li></ul><p id="b0674fc2-4fb2-495f-9997-a7c1af68c17d" class="">У хеш-таблиц есть строгие ограничения:</p><ul id="e37a6d8d-dba6-41d8-bd28-a951c2b3dd9f" class="bulleted-list"><li style="list-style-type:disc">Ключи элементов хеш-таблицы должны быть уникальными: двух одинаковых ключей в таблице быть не может. </li></ul><ul id="976c9490-8f43-4a00-ae4c-0174eff72e04" class="bulleted-list"><li style="list-style-type:disc">Ключи должны относиться к неизменяемым типам данных.</li></ul><p id="a182ca65-195a-4e78-8d17-4443873320b8" class="">Особенности хеш-таблицы:</p><ul id="f2cd17ef-0298-49a2-b377-2df179de11b2" class="bulleted-list"><li style="list-style-type:disc">Быстрый
+ поиск элемента по ключу: переданный для поиска ключ преобразуется (как и
+ при создании нового элемента) в хеш, а хеш — в индекс. Временная 
+сложность извлечения элемента по индексу — <code>O(1)</code>.</li></ul><ul id="751fa170-1141-4c77-999f-4bd60acbfb91" class="bulleted-list"><li style="list-style-type:disc">Добавление нового элемента в большинстве случаев выполняется за время, близкое к <code>O(1)</code>:
+ смещения элементов не требуется, ведь из хешей создаются уникальные 
+индексы, и новые элементы встают «на незанятые места» в массиве. Однако 
+при увеличении длины массива потребуется реаллокация, и в этом случае 
+добавление элемента пройдёт за время, примерно равное <code>O(n)</code>.</li></ul><ul id="307d7a8d-d385-4d89-a08d-54697ce824fa" class="bulleted-list"><li style="list-style-type:disc">Удаление элемента происходит за время <code>O(1)</code>: ключ удаляемого элемента преобразуется в хеш, а хеш — в индекс; элемент по индексу ищется за время <code>O(1)</code>. </li></ul><p id="e1b17f66-b528-409e-8f99-e734d7594dad" class="">
+</p></header></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<div id="footer">
+	<div id="saying" class="sans">
+		<div class="text">Шпаргалка — мост, ведущий мудрого над безднами забвения к вершине знания.</div> 
+        <div class="src">Дге Тибетский</div>
+	</div>
+</div>
+</body></html>

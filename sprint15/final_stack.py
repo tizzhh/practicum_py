@@ -1,4 +1,4 @@
-# id попытки: 111869603
+# id попытки: 111880775
 
 
 from string import digits
@@ -7,21 +7,21 @@ DIGITS = set(digits)
 
 
 def decode_message(message: str) -> str:
-    stack = []
+    stack: list[tuple[str, str]] = []
     multiplier = ''
     res = ''
-    for ch in message:
-        if ch in DIGITS:
-            multiplier += ch
-        elif ch == '[':
+    for char in message:
+        if char in DIGITS:
+            multiplier += char
+        elif char == '[':
             stack.append((res, multiplier))
             multiplier = ''
             res = ''
-        elif ch == ']':
+        elif char == ']':
             inner_message, num = stack.pop()
             res = inner_message + res * int(num)
         else:
-            res += ch
+            res += char
     return res
 
 

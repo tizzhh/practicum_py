@@ -1,4 +1,4 @@
-# id попытки: 111867807
+# id попытки: 111880687
 
 from string import digits
 
@@ -10,18 +10,19 @@ def decode_message(message: str) -> str:
         res = ''
         multiplier = ''
         while pos < len(message):
-            if message[pos] in DIGITS:
-                multiplier += message[pos]
-            elif message[pos] == '[':
-                inner_message, indx_shift = inner(pos + 1)
+            cur_char = message[pos]
+            pos += 1
+            if cur_char in DIGITS:
+                multiplier += cur_char
+            elif cur_char == '[':
+                inner_message, indx_shift = inner(pos)
                 res += int(multiplier) * inner_message
                 multiplier = ''
                 pos = indx_shift
-            elif message[pos] == ']':
+            elif cur_char == ']':
                 break
             else:
-                res += message[pos]
-            pos += 1
+                res += cur_char
         return res, pos
 
     return inner()[0]
